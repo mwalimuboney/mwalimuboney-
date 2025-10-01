@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global E-Learning Hub – Secure Educational Resources</title>
+
+    <meta name="description" content="Secure and free educational resources for Primary, Junior Secondary, Senior Secondary, and University levels. Instant access to view-only documents via Google Drive.">
+    <meta name="keywords" content="educational resources, free learning, primary school, secondary school, university documents, google drive link, view only, secure education">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.yourdomain.com/index.html">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <h1><i class="fas fa-book-open"></i> Global E-Learning Hub</h1>
+        <nav class="main-nav">
+            <button class="nav-button active" onclick="showSection('home')">Home</button>
+            <button class="nav-button" onclick="showSection('about')">About Us</button>
+            <button class="nav-button" onclick="showSection('contact')">Contact</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="content-section active">
+            <h2>Select Your Educational Level to Start</h2>
+            <div class="level-selection">
+                <div class="level-card" onclick="selectLevel('primary')">
+                    <i class="fas fa-child"></i>
+                    <h3>Primary Level</h3>
+                </div>
+                <div class="level-card" onclick="selectLevel('junior')">
+                    <i class="fas fa-school"></i>
+                    <h3>Junior Secondary</h3>
+                </div>
+                <div class="level-card" onclick="selectLevel('senior')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Senior Secondary</h3>
+                </div>
+                <div class="level-card" onclick="selectLevel('university')">
+                    <i class="fas fa-university"></i>
+                    <h3>University Level</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="content-section hidden">
+            <button class="back-button" onclick="showSection('home')">
+                <i class="fas fa-arrow-left"></i> Back to Levels
+            </button>
+            <h2 id="resource-title"></h2>
+
+            <div class="search-bar-container">
+                <form id="secure-search-form" action="https://www.google.com/search" method="GET" target="_blank">
+                    <input type="hidden" name="q" value="site:yourdomain.com filetype:pdf OR filetype:doc">
+                    <input type="text" id="search-query" name="q" placeholder="Search resources (e.g., 'Math Grade 8' or 'Physics')">
+                    <button type="submit"><i class="fas fa-search"></i> Search</button>
+                </form>
+                <small>Searching helps Google index our document pages faster.</small>
+            </div>
+
+            <div id="content-display" class="resource-grid">
+                <div class="resource-item primary">
+                    <h3>Primary - Mathematics Concepts</h3>
+                    <a href="YOUR_VIEW_ONLY_GDRIVE_LINK_FOR_MATH" target="_blank" rel="noopener">
+                        <button class="view-button">View Document (View-Only)</button>
+                    </a>
+                </div>
+                
+                </div>
+        </section>
+
+        <section id="about" class="content-section hidden">
+            <h2>About The Hub</h2>
+            <p>Our mission is to provide easily accessible, high-quality educational materials to students worldwide. All our documents are hosted securely on Google Drive with **View-Only** permission enabled to protect the integrity of the original files.</p>
+        </section>
+        <section id="contact" class="content-section hidden">
+            <h2>Get in Touch</h2>
+            <p>For support or content suggestions, please contact us at support@yourdomain.com.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Global E-Learning Hub. All Rights Reserved.</p>
+        <p>Built with security and accessibility in mind.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
