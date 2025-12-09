@@ -3,92 +3,1432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global E-Learning Hub – Secure Educational Resources</title>
-
-    <meta name="description" content="Secure and free educational resources for Primary, Junior Secondary, Senior Secondary, and University levels. Instant access to view-only documents via Google Drive.">
-    <meta name="keywords" content="educational resources, free learning, primary school, secondary school, university documents, google drive link, view only, secure education">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.yourdomain.com/index.html">
-
-    <link rel="stylesheet" href="style.css">
+    <title>Mwalimu Boney Learning Centre - Home</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2003/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+    <style>
+        /* --- Root Variables: Dark Theme (Default) --- */
+        :root {
+            --bg-color-dark: #1f2937;
+            --bg-color-light: #374151;
+            --text-color-primary: #f3f4f6;
+            --text-color-secondary: #9ca3af;
+            --color-indigo-600: #4f46e5;
+            --color-indigo-700: #4338ca;
+            --color-green-600: #10b981;
+            --color-red-600: #ef4444;
+            --color-orange-600: #f97316;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --header-bg: var(--bg-color-light);
 
-    <header class="main-header">
-        <h1><i class="fas fa-book-open"></i> Global E-Learning Hub</h1>
-        <nav class="main-nav">
-            <button class="nav-button active" onclick="showSection('home')">Home</button>
-            <button class="nav-button" onclick="showSection('about')">About Us</button>
-            <button class="nav-button" onclick="showSection('contact')">Contact</button>
+            --card-color-1: #6366f1;
+            --card-color-2: #10b981;
+            --card-color-3: #f59e0b;
+            --card-color-4: #ec4899;
+            --base-font-size: 16px;
+        }
+
+        /* --- Root Variables: Light Theme --- */
+        body.light-theme {
+            --bg-color-dark: #f3f4f6;
+            --bg-color-light: #ffffff;
+            --text-color-primary: #1f2937;
+            --text-color-secondary: #4b5563;
+            --header-bg: #e5e7eb;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+            font-size: var(--base-font-size);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            padding: 0.5rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-small {
+            margin-right: 0.5rem;
+        }
+        
+        /* Digital Clock Styling */
+        #digital-clock {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: blue;
+            margin-right: 1rem;
+            letter-spacing: 0.5px;
+            background-color: #06ee2d;
+            border: #ee06bc 5px solid;
+        }
+
+        .header-actions button {
+            background: none;
+            border: none;
+            color: var(--text-color-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 0.75rem;
+            transition: color 0.2s;
+        }
+        .header-actions button:hover {
+            color: var(--color-indigo-600);
+        }
+        
+        /* Nav Links */
+        nav {
+            display: flex;
+            gap: 1rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--text-color-secondary);
+            margin-top: 0.5rem;
+        }
+        nav a {
+            color: var(--text-color-primary);
+            text-decoration: none;
+            padding: 0.5rem 0.5rem;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.2s;
+            font-size: 0.9rem;
+        }
+        nav a:hover, nav a.active {
+            border-bottom-color: var(--color-indigo-600);
+        }
+        
+        /* Greeting Style */
+        #welcome-greeting {
+            color: var(--color-green-600);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+
+        /* --- UI OVERHAUL: Auth Forms and Portal --- */
+        .auth-controls {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+            padding: 2rem 1rem;
+        }
+
+        #sign-in-form, #register-form, #portal-view {
+            background-color: var(--bg-color-light);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 400px;
+            border-top: 5px solid var(--color-indigo-600);
+        }
+        
+        #portal-view {
+            max-width: 700px;
+            border-top: 5px solid var(--color-green-600);
+        }
+
+        #sign-in-form h2, #register-form h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--color-indigo-600);
+        }
+
+        #portal-view h2 {
+            color: var(--color-green-600);
+            border-bottom: 1px solid var(--text-color-secondary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        input[type="email"], input[type="password"], input[type="text"], input[type="url"], select, #resource-file {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--text-color-secondary);
+            border-radius: 0.3rem;
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-primary);
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: var(--color-indigo-600);
+            outline: none;
+        }
+        /* File input needs special color handling for text/button */
+        #resource-file {
+            padding: 0.5rem; /* Smaller padding for file input */
+            cursor: pointer;
+        }
+
+
+        .auth-btn-primary, .admin-btn-primary {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.3rem;
+            background-color: var(--color-indigo-600);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .auth-btn-primary:hover, .admin-btn-primary:hover {
+            background-color: var(--color-indigo-700);
+        }
+
+        .auth-btn-secondary {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-secondary);
+            border: 1px solid var(--text-color-secondary);
+            padding: 0.75rem;
+            border-radius: 0.3rem;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .auth-btn-secondary:hover {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-primary);
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-color-secondary);
+        }
+        .toggle-link a {
+            color: var(--color-indigo-600);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-color-secondary);
+        }
+
+        /* --- Settings Modal Styles --- */
+        #settings-modal { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            display: none;
+        }
+        #settings-container {
+            
+            width: 90%;
+            max-width: 400px;
+            box-shadow: var(--card-shadow);
+            justify-content: flex;
+        
+            border-radius: 0.75rem;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--color-indigo-600); 
+            padding: 0.5rem;
+            background-color: var(--bg-color-dark);
+            display: flex;
+            flex-direction: column; 
+            gap: 10px;
+            
+            
+        }.settings-header{
+            background-color: #06fd06;
+        }
+        .settings-option, .settings-header {
+            border: 1px solid #06fd06;
+            padding: 15px;
+            border-left: 5px solid var(--color-indigo-600);
+            border-radius: 0.75rem;
+            
+        }
+
+        .settings-btn-group button {
+            padding: 0.5rem 0.75rem;
+            margin-left: 0.5rem;
+            background-color: var(--color-indigo-600);
+            color: var(--text-color-primary);
+            border: none;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .settings-btn-group button:hover {
+            background-color: var(--color-indigo-700);
+        }
+
+        /* --- Console Modal Styles --- */
+        #console-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2500;
+            display: none; 
+        }
+        #console-container {
+            background-color: #000;
+            color: #fff;
+            width: 90%;
+            max-width: 700px;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 2px solid var(--color-indigo-600);
+        }
+        #console-output {
+            padding: 1rem;
+            overflow-y: auto;
+            flex-grow: 1;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+        .console-line { margin-bottom: 0.25rem; }
+        .console-prompt { color: #81d4fa; }
+        .console-success { color: #69f0ae; }
+        .console-error { color: #ff5252; font-weight: bold; }
+        
+        /* --- General Layout and Card Animations (Retained) --- */
+        main {
+            flex-grow: 1;
+            padding: 1rem;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, var(--bg-color-dark) 0%, #111827 100%);
+            padding: 4rem 1rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .home-card-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin-bottom: 2rem;
+        }
+        .info-card {
+            background-color: var(--bg-color-light);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--color-indigo-600);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            min-height: 200px; 
+        }
+        .info-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .grid-container {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 1.5rem;
+             margin-top: 1.5rem;
+        }
+        .resource-card {
+            background-color: var(--bg-color-light);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--card-shadow);
+            border-top: 5px solid var(--color-indigo-600);
+            display: flex;
+            flex-direction: column;
+            min-height: 250px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .resource-card.is-visible {
+             opacity: 1;
+             transform: translateY(0);
+        }
+        
+        .type-badge {
+            background-color: var(--color-indigo-700);
+            color: var(--text-color-primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.3rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tag-pill {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-secondary);
+            padding: 0.1rem 0.4rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            margin-right: 0.5rem;
+            display: inline-block;
+        }
+        
+        .file-viewer-link {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--color-green-600);
+            color: white;
+            text-align: center;
+            border-radius: 0.3rem;
+            text-decoration: none;
+            margin-top: auto;
+            transition: background-color 0.2s;
+        }
+        .file-viewer-link:hover {
+            background-color: #0b9e6e;
+        }
+        
+        .media-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            margin: 0.75rem 0;
+        }
+        .media-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 0.375rem;
+        }
+        
+        footer {
+            background-color: #111827;
+            padding: 1rem;
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid var(--bg-color-light);
+            font-size: 0.8rem;
+            color: var(--text-color-secondary);
+        }
+        .hidden { display: none !important; }
+        .flex { display: flex; }
+        .space-x-2 > * + * { margin-left: 0.5rem; }
+        .text-sm { font-size: 0.875rem; }
+    </style>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+</head>
+<body id="app-body">
+
+    <header>
+        <div class="nav-container">
+            <h1>
+                <span id="digital-clock">00:00:00.00</span>
+                <span class="icon-small"></span>
+                Mwalimu Boney Learning Centre
+            </h1>
+            <div class="header-actions">
+                <button onclick="window.toggleSettings()" id="settings-toggle-btn" title="Settings"><span aria-label="Settings">⚙️</span></button>
+            </div>
+        </div>
+        
+        <nav id="main-nav">
+            <a href="#" onclick="window.navigateTo('home')" id="nav-home" class="active">Home 🏠</a>
+            <a href="#" onclick="window.navigateTo('dashboard')" id="nav-dashboard">Resources 📚</a>
+            <a href="#" onclick="window.navigateTo('portal')" id="nav-portal" class="hidden">Admin Portal</a>
+            <a href="#" onclick="window.handleSignOut()" id="nav-signout" class="hidden">Sign Out</a>
+            <a href="#" onclick="window.navigateTo('auth'); window.toggleAuthForm(true);" id="nav-signin">Sign In</a>
         </nav>
     </header>
 
     <main>
-        <section id="home" class="content-section active">
-            <h2>Select Your Educational Level to Start</h2>
-            <div class="level-selection">
-                <div class="level-card" onclick="selectLevel('primary')">
-                    <i class="fas fa-child"></i>
-                    <h3>Primary Level</h3>
-                </div>
-                <div class="level-card" onclick="selectLevel('junior')">
-                    <i class="fas fa-school"></i>
-                    <h3>Junior Secondary</h3>
-                </div>
-                <div class="level-card" onclick="selectLevel('senior')">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>Senior Secondary</h3>
-                </div>
-                <div class="level-card" onclick="selectLevel('university')">
-                    <i class="fas fa-university"></i>
-                    <h3>University Level</h3>
-                </div>
-            </div>
-        </section>
-
-        <section id="resources" class="content-section hidden">
-            <button class="back-button" onclick="showSection('home')">
-                <i class="fas fa-arrow-left"></i> Back to Levels
-            </button>
-            <h2 id="resource-title"></h2>
-
-            <div class="search-bar-container">
-                <form id="secure-search-form" action="https://www.google.com/search" method="GET" target="_blank">
-                    <input type="hidden" name="q" value="site:yourdomain.com filetype:pdf OR filetype:doc">
-                    <input type="text" id="search-query" name="q" placeholder="Search resources (e.g., 'Math Grade 8' or 'Physics')">
-                    <button type="submit"><i class="fas fa-search"></i> Search</button>
-                </form>
-                <small>Searching helps Google index our document pages faster.</small>
+        <div id="home-view" class="dashboard-section">
+            <div class="hero-section">
+                <h2>Empowering Education in Africa</h2>
+                <hr style="margin: 4px 0px 4px;">
+                <p>Welcome to Mwalimu Boney Learning Centre. Access quality, localized learning materials from anywhere.</p>
+                <br>
+                <button type="button"
+                    onclick="window.navigateTo('dashboard')" 
+                    class="auth-btn-primary" 
+                    style="width: auto; padding: 0.75rem 2rem; margin: 0 auto; display: block;"
+                >
+                    View Resources
+                </button>
             </div>
 
-            <div id="content-display" class="resource-grid">
-                <div class="resource-item primary">
-                    <h3>Primary - Mathematics Concepts</h3>
-                    <a href="YOUR_VIEW_ONLY_GDRIVE_LINK_FOR_MATH" target="_blank" rel="noopener">
-                        <button class="view-button">View Document (View-Only)</button>
-                    </a>
+            <div class="home-card-grid">
+                
+                <div id="about-card" class="info-card">
+                    <h3>About Us 🌍</h3>
+                    <p style="color: var(--text-color-primary);">
+                        Founded on the principle of accessibility, our centre provides digital artifacts and educational content tailored for the African curriculum. 
+                        We believe that technology is the key to unlocking potential, offering a collaborative space for teachers and students across the continent. 
+                        Our team is dedicated to curating high-quality, free resources to support lifelong learning.
+                    </p>
+                </div>
+
+                <div id="news-card" class="info-card">
+                    <h3>News Board 📢</h3>
+                    <ul>
+                        <li><span style="font-weight: 600;">[2025-12-09]</span>: Launched new Science & Maths video series!</li>
+                        <li><span style="font-weight: 600;">[2025-11-20]</span>: New integration with local exam papers available.</li>
+                        <li><span style="font-weight: 600;">[2025-10-01]</span>: Teacher registration window re-opened for new tutors.</li>
+                        <li><span style="font-weight: 600;">[2025-09-15]</span>: Partnership with the Ministry of Education announced.</li>
+                    </ul>
+                </div>
+
+                <div id="contact-card" class="info-card">
+                    <h3>Contact Us 📞</h3>
+                    <p>Get in touch with our support and admin team:</p>
+                    <ul>
+                        <li><strong>Email:</strong> <a href="mwalimuboney@gmail.com" class="contact-link">support@mwalimuboney.org</a></li>
+                        <li><strong><a href="https://wa.me/+254745151263" class="contact-link">WhatsApp me</a></strong></li>
+                        <li><strong>Social Media:</strong> 
+                            <a href="#" class="contact-link" style="display: inline;">Twitter</a> | 
+                            <a href="#" class="contact-link" style="display: inline;">Facebook</a> |
+                            <a href="#" class="contact-link" style="display: inline;">LinkedIn</a>
+                        </li>
+                    </ul>
                 </div>
                 
+            </div>
+            
+            <p style="text-align: center; color: var(--text-color-secondary); padding: 1rem 0;">Scroll down to see the resource dashboard or sign in above.</p>
+        </div>
+
+        <div id="app-views" class="hidden">
+            <p id="welcome-greeting" class="hidden"></p>
+
+            <p id="welcome-action-message" style="padding: 0.5rem 0; margin-bottom: 1rem; color: var(--text-color-secondary);">
+                Please sign in or register to access resources.
+            </p>
+            
+            <div id="auth-forms" class="auth-controls hidden">
+                
+                <form id="sign-in-form">
+                    <h2>Sign In to Continue</h2>
+                    <input type="email" id="signin-email" placeholder="Email Address" required>
+                    <input type="password" id="signin-password" placeholder="Password" required>
+                    <button type="submit" class="auth-btn-primary">Sign In</button>
+                    <button type="button" onclick="handleGuestLogin()" class="auth-btn-secondary" style="margin-top: 0.5rem;">Continue as Guest</button>
+                    <div class="toggle-link">
+                        Don't have an account? <a href="#" onclick="window.toggleAuthForm(false)">Register here</a>.
+                    </div>
+                </form>
+
+                <form id="register-form" class="hidden">
+                    <h2>Create New Account</h2>
+                    <input type="email" id="register-email" placeholder="Email Address" required>
+                    <input type="text" id="register-phone" placeholder="Phone Number (Optional)">
+                    <input type="password" id="register-password" placeholder="Password (min 6 characters)" required>
+                    <button type="submit" class="auth-btn-primary">Register Account</button>
+                    <div class="toggle-link">
+                        Already have an account? <a href="#" onclick="window.toggleAuthForm(true)">Sign In</a>.
+                    </div>
+                </form>
+            </div>
+            
+            <div id="dashboard-view" class="dashboard-section hidden">
+                <h2 id="resource-list-start" style="color: var(--text-color-primary);">Resource Dashboard</h2>
+                <div id="filter-buttons" class="flex space-x-2"></div>
+                
+                <div id="loading-spinner" class="hidden" style="text-align: center; padding: 2rem;">
+                    <div style="border: 4px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top: 4px solid var(--color-indigo-600); width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                    <p style="margin-top: 0.5rem; color: var(--text-color-secondary);">Fetching resources...</p>
+                    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
                 </div>
-        </section>
+                
+                <div id="resource-container" class="hidden"></div>
+            </div>
+            
+            <div id="portal-view" class="admin-portal hidden">
+                <h2>Admin Resource Uploader</h2>
+                <form id="upload-resource-form">
+                    <div class="input-group">
+                        <label for="resource-title">Title</label>
+                        <input type="text" id="resource-title" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="resource-type">Resource Type</label>
+                        <select id="resource-type" required onchange="window.updateLinkPlaceholder(this.value)">
+                            <option value="">-- Select Type --</option>
+                            <option value="Video">Video (YouTube/External)</option>
+                            <option value="Document">Document (PDF/DOCX)</option>
+                            <option value="Image">Image (JPEG/PNG)</option>
+                            <option value="Audio">Audio (MP3/WAV)</option>
+                            <option value="Slides">Slides (SlideShare/External)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="resource-file">Upload Local File (Optional)</label>
+                        <input type="file" id="resource-file" accept="video/*,audio/*,image/*,.pdf,.docx,.ppt">
+                        <p style="font-size: 0.8rem; color: var(--text-color-secondary); margin-top: 0.5rem;">OR</p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="resource-link">External Link/URL (Optional if file uploaded)</label>
+                        <input type="url" id="resource-link" placeholder="Enter URL (YouTube link, Slideshare, etc.)">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="resource-tags">Tags (Comma-separated, e.g., Math, Algebra)</label>
+                        <input type="text" id="resource-tags" placeholder="e.g., Science, Biology, Exam Prep">
+                    </div>
+                    
+                    <button type="submit" class="admin-btn-primary">Add Resource</button>
+                </form>
+                <button type="button" onclick="window.fetchAndRender()" class="auth-btn-secondary" style="margin-top: 0.5rem; width: 100%;">Refresh Resource List (Required after adding)</button>
+            </div>
+        </div>
 
-        <section id="about" class="content-section hidden">
-            <h2>About The Hub</h2>
-            <p>Our mission is to provide easily accessible, high-quality educational materials to students worldwide. All our documents are hosted securely on Google Drive with **View-Only** permission enabled to protect the integrity of the original files.</p>
-        </section>
-        <section id="contact" class="content-section hidden">
-            <h2>Get in Touch</h2>
-            <p>For support or content suggestions, please contact us at support@yourdomain.com.</p>
-        </section>
+
     </main>
-
+    
     <footer>
-        <p>&copy; 2025 Global E-Learning Hub. All Rights Reserved.</p>
-        <p>Built with security and accessibility in mind.</p>
+        &copy; 2025 Mwalimu Boney Learning Centre. All rights reserved. | Built with Firebase.
     </footer>
 
-    <script src="script.js"></script>
+    <div id="settings-modal" class="hidden">
+        <div id="settings-container">
+            <div class="settings-header">
+                <h3 style="color: var(--text-color-primary); font-size: 1.125rem;">Application Settings</h3>
+                <button onclick="window.ClosetoggleSettings()" title="Close" style="background: none; border: none; color: var(--color-red-600); font-size: 1.5rem; cursor: pointer;">X</button>
+            </div>
+
+            <div class="settings-option">
+                <label>Theme</label>
+                <button onclick="window.toggleTheme()" id="theme-toggle-btn">Switch to Light</button>
+            </div>
+
+            <div class="settings-option">
+                <label>Font Size</label>
+                <div class="settings-btn-group" style="display: grid; grid-template-rows: auto; gap: 15px;">
+                    <button onclick="window.changeFontSize(-1)">A-</button>
+                    <button onclick="window.changeFontSize(1)">A+</button>
+                </div>
+            </div>
+
+            <div class="settings-option" id="admin-console-setting">
+                <label>Developer Console (Admin Only)</label>
+                <button onclick="window.toggleConsole(true)">Open Console</button>
+            </div>
+
+        </div>
+    </div>
+    
+    <div id="console-modal">
+        <div id="console-container">
+            <div class="settings-header">
+                <h3 style="color: var(--text-color-primary); font-size: 1.125rem;">Application Console</h3>
+                <button onclick="window.toggleConsole(false)" title="Close" style="background: none; border: none; color: var(--color-red-600); font-size: 1.5rem; cursor: pointer;">X</button>
+            </div>
+            <div id="console-output">
+                <p class="console-line console-prompt">&gt;&gt; Application initialized. Awaiting user action...</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- 1. FIREBASE CONFIGURATION (Use your specific keys) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWcJwCY--bFzMg1GcWG2zJPY7pBZ1dM-A",
+            authDomain: "mwalimuboney-resource-centre.firebaseapp.com",
+            projectId: "mwalimuboney-resource-centre",
+            storageBucket: "mwalimuboney-resource-centre.firebasestorage.app",
+            messagingSenderId: "547620617434",
+            appId: "1:547620617434:web:225e739d0a5bb6feb3b9e3"
+        };
+        
+        // --- 2. GLOBAL STATE AND CONSTANTS ---
+        const USER_COLLECTION_PATH = 'users'; 
+        const LEARNING_RESOURCE_DOC_PATH = "artifacts/mwalimuboney-resource-centre/public/learning_resources";
+        
+        const appState = {
+            isAuthenticated: false,
+            isGuest: false,
+            userEmail: null,
+            userUID: null,
+            userRole: 'guest',
+            db: null,
+            auth: null,
+            storage: null, 
+            isLoading: true,
+            activeFilter: 'All',
+            resources: [], 
+            currentView: 'home', 
+            isEditing: false, 
+            editingResourceId: null, 
+            currentFontSize: 16, 
+            isLightTheme: false,
+        };
+
+        const CARD_COLOR_KEYS = ['1', '2', '3', '4'];
+        const CARD_COLORS_MAP = {
+            '1': 'var(--card-color-1)',
+            '2': 'var(--card-color-2)',
+            '3': 'var(--card-color-3)',
+            '4': 'var(--card-color-4)'
+        };
+        
+        // --- 3. FIREBASE INITIALIZATION ---
+        try {
+            const app = firebase.initializeApp(firebaseConfig); 
+            appState.auth = firebase.auth();       
+            appState.db = firebase.firestore();    
+            appState.storage = firebase.storage(); 
+            logToConsole("Firebase app initialized successfully.", 'success');
+        } catch(e) {
+             logToConsole(`Firebase Init Error: ${e.message}. Check config!`, 'error');
+        }
+
+        // --- 4. Clock, Greeting, Settings Logic ---
+
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            const ms = String(now.getMilliseconds()).padStart(3, '0').slice(0, 2); 
+            
+            document.getElementById('digital-clock').textContent = `${h}:${m}:${s}.${ms}`;
+        }
+        
+        setInterval(updateClock, 50); 
+        updateClock(); 
+
+        function getGreeting(email) {
+            const hour = new Date().getHours();
+            let timeOfDay;
+            if (hour < 12) {
+                timeOfDay = 'Good Morning';
+            } else if (hour < 17) {
+                timeOfDay = 'Good Afternoon';
+            } else {
+                timeOfDay = 'Good Evening';
+            }
+            // Use the part before the @ sign, capitalized for friendly greeting
+            const username = email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1);
+            return `${timeOfDay}, ${username}!`;
+        }
+
+
+        window.toggleSettings = function () {
+    
+            document.getElementById('settings-modal').classList.remove('hidden');
+            document.getElementById('settings-modal').style.display = 'flex';
+            document.getElementById('settings-container').style.display = 'flex';
+            document.getElementById('settings-modal').classList.toggle('active');
+            
+        }
+        function ClosetoggleSettings(){
+            
+                document.getElementById('settings-modal').classList.add('hidden');
+                document.getElementById('settings-modal').style.display = 'none';
+                document.getElementById('settings-container').style.display = 'none';
+                document.getElementById('settings-modal').classList.toggle('active');
+            
+        }
+        
+
+        window.toggleTheme = function() {
+            const body = document.getElementById('app-body');
+            appState.isLightTheme = !appState.isLightTheme;
+            body.classList.toggle('light-theme', appState.isLightTheme);
+            
+            const btn = document.getElementById('theme-toggle-btn');
+            btn.textContent = appState.isLightTheme ? 'Switch to Dark' : 'Switch to Light';
+        }
+
+        window.changeFontSize = function(direction) {
+            appState.currentFontSize = Math.min(24, Math.max(12, appState.currentFontSize + direction));
+            document.documentElement.style.setProperty('--base-font-size', `${appState.currentFontSize}px`);
+        }
+        
+        // --- 5. UTILITY FUNCTIONS (Console, UI Toggles, Navigation) ---
+        
+        function logToConsole(message, type = 'log') {
+            const consoleOutput = document.getElementById('console-output');
+            
+            if (appState.userRole !== 'admin' && appState.isAuthenticated) {
+                if (!message.includes("User State Changed") && !message.includes("logged out")) return; 
+            }
+
+            const p = document.createElement('p');
+            p.classList.add('console-line');
+
+            let prefix = '>>';
+            if (type === 'error') {
+                p.classList.add('console-error');
+                prefix = 'Error:';
+            } else if (type === 'success') {
+                p.classList.add('console-success');
+                prefix = 'Success:';
+            } else {
+                p.classList.add('console-prompt');
+            }
+            
+            const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false });
+            p.innerHTML = `${prefix} ${message} <span style="float: right;">${timestamp}</span>`;
+            consoleOutput.appendChild(p);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        window.toggleConsole = function(show) {
+            document.getElementById('settings-modal').style.display = 'none'; 
+            
+            if (appState.userRole === 'admin' || !show) {
+                 document.getElementById('console-modal').style.display = show ? 'flex' : 'none';
+            } else if (show) {
+                 logToConsole("Console access denied. Only available to Admin role.", 'error');
+            }
+        }
+
+        function renderConsoleToggle() {
+             const consoleSetting = document.getElementById('admin-console-setting');
+             consoleSetting.classList.toggle('hidden', appState.userRole !== 'admin');
+        }
+        
+        window.toggleAuthForm = function(showSignIn = true) {
+            // Ensure auth forms container is visible before showing specific form
+            document.getElementById('auth-forms').classList.remove('hidden');
+            document.getElementById('sign-in-form').classList.toggle('hidden', !showSignIn);
+            document.getElementById('register-form').classList.toggle('hidden', showSignIn);
+        }
+        
+        window.navigateTo = function(view) {
+            appState.currentView = view;
+            
+            const isHome = view === 'home';
+            const isDashboard = view === 'dashboard';
+            const isAuth = view === 'auth';
+            const isPortal = view === 'portal';
+            
+            document.getElementById('home-view').classList.toggle('hidden', !isHome);
+            document.getElementById('app-views').classList.toggle('hidden', isHome);
+
+            document.getElementById('nav-home').classList.toggle('active', isHome);
+            document.getElementById('nav-dashboard').classList.toggle('active', isDashboard);
+            document.getElementById('nav-portal').classList.toggle('active', isPortal);
+            document.getElementById('nav-signin').classList.toggle('active', isAuth && !appState.isAuthenticated);
+            
+            // Toggle visibility of the three main app-views sections
+            document.getElementById('auth-forms').classList.toggle('hidden', !isAuth);
+            document.getElementById('dashboard-view').classList.toggle('hidden', !isDashboard);
+            document.getElementById('portal-view').classList.toggle('hidden', !isPortal);
+
+            if (isHome) {
+                 setupHomeCardObserver();
+                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (isDashboard) {
+                 renderResources();
+            }
+        }
+
+        function renderAll() {
+            renderAuthControls();
+            renderNavigation();
+            renderFilterButtons();
+            renderConsoleToggle(); 
+            
+            // Determine the navigation route based on state
+            if (appState.currentView === 'home' || !appState.isAuthenticated) {
+                // If not authenticated, always show the home view.
+                if (appState.currentView !== 'auth') {
+                     window.navigateTo('home');
+                } else {
+                     // Stay on auth page if user explicitly navigated there
+                     document.getElementById('home-view').classList.add('hidden');
+                     document.getElementById('app-views').classList.remove('hidden');
+                }
+            } else {
+                // If authenticated, navigate to the last active view (Dashboard/Portal)
+                if (appState.currentView === 'auth' || appState.currentView === 'home') {
+                    window.navigateTo('dashboard'); // Redirect authenticated users from the auth page/home
+                } else {
+                    window.navigateTo(appState.currentView);
+                }
+            }
+        }
+        
+        function renderNavigation() {
+            document.getElementById('nav-signout').classList.toggle('hidden', !appState.isAuthenticated);
+            document.getElementById('nav-signin').classList.toggle('hidden', appState.isAuthenticated);
+            
+            const showPortal = appState.isAuthenticated && (appState.userRole === 'admin' || appState.userRole === 'teacher');
+            document.getElementById('nav-portal').classList.toggle('hidden', !showPortal);
+        }
+
+        function renderAuthControls() {
+            const welcomeMsgEl = document.getElementById('welcome-action-message');
+            const welcomeGreetingEl = document.getElementById('welcome-greeting');
+
+            if (appState.isAuthenticated) {
+                welcomeGreetingEl.classList.remove('hidden');
+                welcomeGreetingEl.textContent = getGreeting(appState.userEmail);
+                
+                if (appState.isGuest) {
+                    welcomeMsgEl.innerHTML = `You are viewing resources as a Guest. <a href="#" onclick="handleSignOut()" style="text-decoration: underline; color: var(--color-orange-600);">Sign In?</a>`;
+                } else {
+                    welcomeMsgEl.innerHTML = `<span style="color: var(--color-green-600); font-weight: 700;">You are logged in as a ${appState.userRole.toUpperCase()}.</span> Access the <a href="#resource-list-start" style="text-decoration: underline; color: var(--color-indigo-600);">Resource Dashboard</a> below.`;
+                }
+            } else {
+                welcomeGreetingEl.classList.add('hidden');
+                welcomeMsgEl.innerHTML = `Please sign in or register to access resources.`;
+            }
+        }
+
+        window.updateLinkPlaceholder = function(type) {
+             const input = document.getElementById('resource-link');
+             let placeholder = "External Link/URL (Optional if file uploaded)";
+             
+             if (type === 'Video') {
+                 placeholder = "Enter direct YouTube link (e.g., https://www.youtube.com/watch?v=...)";
+             } else if (type === 'Slides') {
+                 placeholder = "Enter SlideShare or equivalent embeddable link";
+             }
+             input.placeholder = placeholder;
+        }
+
+        function createResourceCard(resource, index) {
+            // Card rendering logic restored
+            const colorKey = CARD_COLOR_KEYS[index % CARD_COLOR_KEYS.length];
+            const borderColor = CARD_COLORS_MAP[colorKey];
+            let mediaHtml = '';
+            let linkHtml = '';
+            
+            const link = resource.link || '';
+            const type = resource.type || 'Unknown';
+            
+            if (type === 'Video' && link.includes('youtube.com')) {
+                try {
+                    const url = new URL(link);
+                    const videoId = url.searchParams.get('v');
+                    if (videoId) {
+                        mediaHtml = `
+                            <div class="media-embed">
+                                <iframe src="https://www.youtube.com/embed/${videoId}" title="${resource.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        `;
+                    }
+                } catch (e) {/* Invalid URL handled by linkHtml fallback */}
+            }
+            else if (type === 'Slides' || (type === 'Video' && !link.includes('youtube.com'))) {
+                 mediaHtml = `
+                    <div class="media-embed">
+                        <iframe src="${link}" title="${resource.title}" allowfullscreen></iframe>
+                    </div>
+                 `;
+            }
+            else if (type === 'Image') {
+                mediaHtml = `<img src="${link}" alt="${resource.title}" style="max-width: 100%; height: auto; border-radius: 0.375rem; margin: 0.75rem 0;">`;
+            }
+            
+            if (!mediaHtml || type === 'Document' || type === 'Audio') {
+                let buttonText = 'View Resource';
+                if (type === 'Document') buttonText = 'View Document 📄';
+                if (type === 'Audio') buttonText = 'Listen to Audio 🎧';
+
+                linkHtml = `
+                    <a href="${link}" target="_blank" class="file-viewer-link">
+                        ${buttonText}
+                    </a>
+                `;
+            }
+
+            const tagsHtml = (resource.tags || []).map(tag => 
+                `<span class="tag-pill">${tag}</span>`
+            ).join('');
+
+            let adminActionsHtml = '';
+            const isAuthorized = appState.userRole === 'admin' || appState.userRole === 'teacher';
+            
+            if (isAuthorized) {
+                 adminActionsHtml = `
+                    <div class="edit-delete-group flex space-x-2" style="margin-top: 1rem;">
+                        <button onclick="window.handleResourceEdit('${resource.id}')" class="auth-btn-secondary" style="width: auto;">Edit ✏️</button>
+                        <button class="auth-btn-secondary" style="background-color: var(--color-red-600); width: auto; color: white;" onclick="window.handleResourceDelete('${resource.id}', '${resource.title}')">Delete 🗑️</button>
+                    </div>
+                 `;
+            }
+
+            return `
+                <div class="resource-card" style="border-top-color: ${borderColor};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <span class="type-badge">${type}</span>
+                        <span style="font-size: 0.875rem; color: var(--text-color-secondary);">${resource.duration || ''}</span>
+                    </div>
+                    
+                    <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-color-primary); flex-grow: 1;">
+                        ${resource.title || 'Untitled Resource'}
+                    </h4>
+                    
+                    ${mediaHtml}
+                    
+                    <div style="margin-top: 0.5rem; margin-bottom: 1rem;">
+                        ${tagsHtml}
+                    </div>
+                    
+                    ${linkHtml}
+                    ${adminActionsHtml}
+                </div>
+            `;
+        }
+        
+        function renderResources() {
+            const container = document.getElementById('resource-container');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const dashboardView = document.getElementById('dashboard-view');
+            
+            if (!appState.isAuthenticated) {
+                dashboardView.classList.add('hidden');
+                return;
+            }
+            
+            dashboardView.classList.remove('hidden');
+
+            if (appState.isLoading) {
+                container.classList.add('hidden');
+                loadingSpinner.classList.remove('hidden');
+                return;
+            }
+            loadingSpinner.classList.add('hidden'); 
+            container.classList.remove('hidden');
+            
+            renderFilterButtons();
+
+            let filteredResources = appState.resources;
+            if (appState.activeFilter !== 'All') {
+                filteredResources = appState.resources.filter(r => r.type === appState.activeFilter);
+            }
+            
+            if (!filteredResources || filteredResources.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: var(--text-color-secondary);">
+                        <p style="font-size: 1.25rem;">No resources found for the current filter: **${appState.activeFilter}**.</p>
+                        <p style="font-size: 1rem; margin-top: 0.5rem;">Check the Firestore document at: ${LEARNING_RESOURCE_DOC_PATH}</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const resourcesHtml = filteredResources.map((r, index) => createResourceCard(r, index)).join('');
+            container.innerHTML = `<div class="grid-container">${resourcesHtml}</div>`;
+            
+            document.querySelectorAll('.resource-card').forEach(card => {
+                card.classList.remove('is-visible'); 
+                resourceObserver.observe(card);
+            });
+        }
+
+        function renderFilterButtons() {
+            const filterContainer = document.getElementById('filter-buttons');
+            if (!filterContainer) return;
+            
+            const uniqueTypes = ['All', ...new Set(appState.resources.map(r => r.type).filter(type => type))]; 
+
+            if (appState.isLoading) {
+                 filterContainer.innerHTML = ''; 
+                 return;
+            }
+            
+            const buttonsHtml = uniqueTypes.map(type => {
+                const isActive = appState.activeFilter === type;
+                const className = isActive ? 'auth-btn-primary' : 'auth-btn-secondary';
+                
+                return `
+                    <button 
+                        onclick="window.setFilter('${type}')" 
+                        class="${className} text-sm" 
+                        style="width: auto; padding: 0.375rem 0.75rem; border-radius: 9999px; margin-top: 0;"
+                    >
+                        ${type}
+                    </button>
+                `;
+            }).join('');
+
+            filterContainer.innerHTML = `<div class="flex space-x-2" style="margin-top: 0.75rem;">${buttonsHtml}</div>`;
+        }
+        
+        window.setFilter = function(type) { 
+            appState.activeFilter = type; 
+            renderAll(); 
+        }
+
+        const resourceObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+
+        let homeCardObserver;
+        function setupHomeCardObserver() {
+            if (homeCardObserver) homeCardObserver.disconnect();
+            
+            homeCardObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 }); 
+
+            document.querySelectorAll('.info-card').forEach(card => {
+                card.classList.remove('is-visible'); 
+                homeCardObserver.observe(card);
+            });
+        }
+
+
+        // --- 6. FIREBASE AUTH/DATA LOGIC ---
+        
+        async function fetchUserProfile(uid) {
+            if (!uid || appState.isGuest) return 'guest';
+            try {
+                const docRef = appState.db.collection(USER_COLLECTION_PATH).doc(uid);
+                const docSnap = await docRef.get();
+                if (docSnap.exists) { 
+                    const data = docSnap.data();
+                    return (data.role || 'student').toLowerCase();
+                } else {
+                    logToConsole("Profile document NOT found. Defaulting to 'student'.", 'error');
+                    return 'student'; 
+                }
+            } catch (error) {
+                logToConsole(`Error fetching user profile: ${error.message}. Check Security Rules for /users/{userId}`, 'error');
+                return 'student'; 
+            }
+        }
+        
+        async function fetchResources() {
+            try {
+                const docRef = appState.db.doc(LEARNING_RESOURCE_DOC_PATH);
+                const docSnap = await docRef.get();
+                
+                if (docSnap.exists) {
+                    const data = docSnap.data();
+                    if (data && data.list && Array.isArray(data.list)) {
+                         appState.resources = data.list;
+                         logToConsole(`Fetched ${data.list.length} resource items successfully.`, 'success');
+                    } else {
+                        logToConsole(`Resource document found, but 'list' array is missing.`, 'error');
+                        appState.resources = [];
+                    }
+                } else {
+                    logToConsole(`Resource document NOT found at: ${LEARNING_RESOURCE_DOC_PATH}`, 'error');
+                    appState.resources = [];
+                }
+            } catch (error) {
+                logToConsole(`Error fetching resources: ${error.message}. Check Firestore read rules!`, 'error');
+                appState.resources = [];
+            }
+        }
+        
+        // --- 7. EVENT HANDLERS (Admin Portal - CRUD) ---
+        
+        async function handleResourceUpload(event) {
+            event.preventDefault();
+            
+            if (appState.userRole !== 'admin' && appState.userRole !== 'teacher') {
+                logToConsole("Permission denied: Only Admin/Teacher can add/edit resources.", 'error');
+                return;
+            }
+
+            const title = document.getElementById('resource-title').value;
+            const type = document.getElementById('resource-type').value;
+            const linkInput = document.getElementById('resource-link').value;
+            const fileInput = document.getElementById('resource-file').files[0];
+            const tags = document.getElementById('resource-tags').value.split(',').map(t => t.trim()).filter(t => t.length > 0);
+            
+            let resourceLink = linkInput;
+            
+            if (!title || !type) {
+                logToConsole("Title and Resource Type must be filled.", 'error');
+                return;
+            }
+            
+            if (!resourceLink && !fileInput && !appState.isEditing) {
+                logToConsole("Please provide either a file upload OR an external link.", 'error');
+                return;
+            }
+
+            if (fileInput) {
+                logToConsole(`Starting upload of file: ${fileInput.name}...`);
+                const fileExtension = fileInput.name.split('.').pop();
+                const uploadPath = `uploads/${appState.userUID}/${Date.now()}.${fileExtension}`;
+                const storageRef = appState.storage.ref(uploadPath);
+                
+                try {
+                    const snapshot = await storageRef.put(fileInput);
+                    resourceLink = await snapshot.ref.getDownloadURL();
+                    logToConsole(`File uploaded successfully. Storage Path: ${uploadPath.substring(0, 30)}...`, 'success');
+                } catch (error) {
+                    logToConsole(`File upload failed: ${error.message}. **CRITICAL: Check Storage Security Rules!**`, 'error');
+                    return; 
+                }
+            }
+            
+            if (!resourceLink) {
+                 logToConsole("Resource link is missing after upload/check.", 'error');
+                 return;
+            }
+
+            let newResource = {
+                title: title,
+                type: type,
+                link: resourceLink,
+                tags: tags,
+                uploadedBy: appState.userEmail,
+                uploadDate: firebase.firestore.Timestamp.now()
+            };
+            
+            if (appState.isEditing) {
+                newResource.id = appState.editingResourceId;
+                logToConsole(`Attempting to UPDATE resource ID: ${newResource.id}...`);
+            } else {
+                newResource.id = Date.now().toString();
+                logToConsole(`Attempting to ADD new resource...`);
+            }
+
+
+            try {
+                const docRef = appState.db.doc(LEARNING_RESOURCE_DOC_PATH);
+                
+                await appState.db.runTransaction(async (transaction) => {
+                    const doc = await transaction.get(docRef);
+                    let currentList = (doc.exists && doc.data().list) ? doc.data().list : [];
+                    
+                    if (appState.isEditing) {
+                        const index = currentList.findIndex(r => r.id === appState.editingResourceId);
+                        if (index !== -1) {
+                            newResource.uploadDate = currentList[index].uploadDate || newResource.uploadDate;
+                            currentList[index] = newResource; 
+                        }
+                        
+                    } else {
+                        currentList.unshift(newResource); 
+                    }
+                    
+                    transaction.set(docRef, { list: currentList, lastUpdated: firebase.firestore.Timestamp.now() });
+                });
+
+                logToConsole(`Resource '${title}' successfully ${appState.isEditing ? 'UPDATED' : 'ADDED'} to Firestore.`, 'success');
+                
+                // Clear state and form
+                appState.isEditing = false;
+                appState.editingResourceId = null;
+                document.getElementById('upload-resource-form').reset();
+                window.updateLinkPlaceholder('');
+                document.querySelector('#upload-resource-form button[type="submit"]').textContent = 'Add Resource';
+                
+            } catch (error) {
+                logToConsole(`Failed to ${appState.isEditing ? 'update' : 'add'} resource to Firestore: ${error.message}. Check Firestore write rules!`, 'error');
+            }
+        }
+        
+        window.handleResourceEdit = function(resourceId) {
+            const resourceToEdit = appState.resources.find(r => r.id === resourceId);
+            if (!resourceToEdit) {
+                logToConsole(`Could not find resource with ID: ${resourceId}`, 'error');
+                return;
+            }
+
+            appState.isEditing = true;
+            appState.editingResourceId = resourceId;
+
+            window.navigateTo('portal'); 
+            
+            document.getElementById('resource-title').value = resourceToEdit.title || '';
+            document.getElementById('resource-type').value = resourceToEdit.type || '';
+            window.updateLinkPlaceholder(resourceToEdit.type);
+            document.getElementById('resource-link').value = resourceToEdit.link || '';
+            document.getElementById('resource-tags').value = (resourceToEdit.tags || []).join(', ');
+            
+            document.querySelector('#upload-resource-form button[type="submit"]').textContent = 'Update Resource';
+            logToConsole(`Editing resource: ${resourceToEdit.title}`, 'prompt');
+        }
+
+        window.handleResourceDelete = async function(resourceId, resourceTitle) {
+            if (!confirm(`Are you sure you want to permanently delete the resource: "${resourceTitle}"?`)) {
+                return;
+            }
+
+            logToConsole(`Attempting to delete resource ID: ${resourceId}`, 'prompt');
+            
+            try {
+                const docRef = appState.db.doc(LEARNING_RESOURCE_DOC_PATH);
+                
+                await appState.db.runTransaction(async (transaction) => {
+                    const doc = await transaction.get(docRef);
+                    if (!doc.exists) throw new Error("Resource list document not found.");
+
+                    let currentList = doc.data().list;
+                    const newList = currentList.filter(resource => resource.id !== resourceId);
+                    
+                    if (newList.length === currentList.length) {
+                        logToConsole("Resource not found in the list.", 'error');
+                        return;
+                    }
+
+                    transaction.set(docRef, { list: newList, lastUpdated: firebase.firestore.Timestamp.now() });
+                });
+
+                logToConsole(`Resource "${resourceTitle}" successfully deleted.`, 'success');
+                await window.fetchAndRender();
+                
+            } catch (error) {
+                logToConsole(`Failed to delete resource: ${error.message}. Check Firestore write rules!`, 'error');
+            }
+        }
+        
+        window.fetchAndRender = async function() {
+             appState.isLoading = true;
+             renderAll();
+             await fetchResources();
+             appState.isLoading = false;
+             renderAll();
+        }
+
+        // --- 8. INITIALIZATION AND LISTENERS ---
+        
+        async function handleSignIn(event) {
+            event.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+            logToConsole(`Attempting sign-in for: ${email}...`);
+            try { 
+                await appState.auth.signInWithEmailAndPassword(email, password); 
+                window.navigateTo('dashboard'); // Redirect on success
+            } catch (error) { 
+                logToConsole(`Sign-in failed. Reason: ${error.message}`, 'error'); 
+            }
+        }
+        async function handleRegistration(event) {
+            event.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const phone = document.getElementById('register-phone').value;
+            const password = document.getElementById('register-password').value;
+            logToConsole(`Attempting registration for: ${email}...`);
+            try {
+                const userCredential = await appState.auth.createUserWithEmailAndPassword(email, password);
+                const uid = userCredential.user.uid;
+                const userDocRef = appState.db.collection(USER_COLLECTION_PATH).doc(uid);
+                await userDocRef.set({ email: email, phoneNumber: phone || '', role: 'student', createdAt: firebase.firestore.Timestamp.now() });
+                logToConsole(`Registration successful. Profile created with default role 'student'.`, 'success');
+                window.navigateTo('dashboard'); // Redirect on success
+            } catch (error) { logToConsole(`Registration failed. Reason: ${error.message}`, 'error'); }
+        }
+        window.handleSignOut = async function() {
+            try { 
+                await appState.auth.signOut(); 
+                window.navigateTo('home'); 
+            } catch (error) { 
+                logToConsole(`Sign out failed: ${error.message}`, 'error'); 
+            }
+        }
+        window.handleGuestLogin = function() {
+            appState.isAuthenticated = true; appState.isGuest = true; appState.userEmail = 'Anonymous User'; appState.userUID = null; appState.userRole = 'guest'; appState.isLoading = false;
+            logToConsole('Continuing as Guest. Resources are limited.'); 
+            renderAll();
+            window.navigateTo('dashboard'); 
+        }
+
+        document.getElementById('sign-in-form').addEventListener('submit', handleSignIn);
+        document.getElementById('register-form').addEventListener('submit', handleRegistration);
+        document.getElementById('upload-resource-form').addEventListener('submit', handleResourceUpload);
+        
+
+
+        /** Main Authentication Listener */
+        appState.auth.onAuthStateChanged(async (user) => { 
+            appState.isLoading = true;
+            appState.isGuest = false; 
+            
+            if (user) {
+                appState.isAuthenticated = true;
+                appState.userEmail = user.email;
+                appState.userUID = user.uid;
+                
+                logToConsole(`User State Changed: Logged in as ${user.email}. Fetching profile...`);
+
+                const role = await fetchUserProfile(user.uid);
+                appState.userRole = role;
+                logToConsole(`Profile fetch COMPLETE. User Role: ${role.toUpperCase()}.`, 'success');
+
+                await fetchResources();
+                
+            } else {
+                appState.isAuthenticated = false;
+                appState.userEmail = null;
+                appState.userUID = null;
+                appState.userRole = 'guest';
+                logToConsole('User State Changed: Logged out.');
+            }
+            
+            appState.isLoading = false;
+            renderAll();
+        });
+        
+        logToConsole("Firebase listeners initialized.");
+        setupHomeCardObserver(); 
+        renderAll();
+
+    </script>
 </body>
 </html>
